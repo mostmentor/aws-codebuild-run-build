@@ -163,7 +163,7 @@ function inputs2Parameters(inputs) {
 
   const environmentVariablesOverride = Object.entries(process.env)
     .filter(
-      ([key]) => key.startsWith("GITHUB_") || envPassthrough.includes(key)
+      ([key]) => envPassthrough.includes(key)
     )
     .map(([name, value]) => ({ name, value, type: "PLAINTEXT" }));
 
