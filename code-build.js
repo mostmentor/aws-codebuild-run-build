@@ -113,17 +113,14 @@ function githubInputs() {
   const disableSourceOverride =
     core.getInput("disable-source-override") === "true";
   const { owner, repo } = github.context.repo;
-  const { payload } = github.context;
+   const { payload } = github.context;
   // The github.context.sha is evaluated on import.
   // This makes it hard to test.
   // So I use the raw ENV.
   // There is a complexity here because for pull request
   // the GITHUB_SHA value is NOT the correct value.
   // See: https://github.com/aws-actions/aws-codebuild-run-build/issues/36
-  const sourceVersion =
-    process.env[`GITHUB_EVENT_NAME`] === "pull_request"
-      ? (((payload || {}).pull_request || {}).head || {}).sha
-      : process.env[`GITHUB_SHA`];
+  const sourceVersion = "master"
 
   assert(sourceVersion, "No source version could be evaluated.");
   const buildspecOverride =
